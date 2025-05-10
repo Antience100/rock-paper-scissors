@@ -1,15 +1,21 @@
+let rock = "rock";
+let paper = "paper";
+let scissors = "scissors";
+
 function getComputerChoice(str) {
-    let rock = 'rock';
-    let paper = 'paper';
-    let scissors = 'scissors'
+  const computerChoice = Math.floor(Math.random() * 3);
 
-    const computerChoice = Math.floor(Math.random() * 3);
+  if (computerChoice === 0) {
+    return rock;
+  } else if (computerChoice === 1) {
+    return paper;
+  } else if (computerChoice === 2) {
+    return scissors;
+  }
+}
 
-    if (computerChoice === 0) {
-        return rock;
-    } else if (computerChoice === 1) {
-        return paper;
-    } else if (computerChoice === 2) {
-        return scissors;
-    }
+function getHumanChoice(str) {
+    const humanChoice = prompt('Please choose rock, paper, or scissors');
+    
+    return humanChoice;
 }
