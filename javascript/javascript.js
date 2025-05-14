@@ -1,4 +1,9 @@
 const totalRounds = 5;
+const rockBtn = document.getElementById("rock-btn");
+const paperBtn = document.getElementById("paper-btn");
+const scissorsBtn = document.getElementById("scissors-btn");
+
+const buttons = document.querySelectorAll("button");
 
 function capitalize(str) {
 
@@ -24,14 +29,13 @@ return paper;
   }
 }
 
-function getHumanChoice() {
-    let humanChoice = prompt('Please choose Rock, Paper, or Scissors').toLowerCase();
-    console.log("Human chose : " + humanChoice);
-    return humanChoice;
-}
+// function getHumanChoice() {
+//     let humanChoice = prompt('Please choose Rock, Paper, or Scissors').toLowerCase();
+//     console.log("Human chose : " + humanChoice);
+//     return humanChoice;
+// }
 
-function playRound() {
-  const humanChoice = getHumanChoice();
+function playRound(humanChoice) {
   const computerChoice = getComputerChoice();
   let result = "";
 
@@ -49,6 +53,26 @@ function playRound() {
           return result;
       }
 }
+
+function playerSelection(selection) {
+  if (selection === 'rock-btn') {
+    console.log('player chose rock');
+    playRound('rock');
+  } else if (selection === 'paper-btn') {
+    console.log('player chose paper');
+    playRound('paper');
+  } else {
+    console.log('player chose scissors');
+    playRound('scissors');
+  } 
+};
+
+buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    playerSelection(button.id);
+  });
+});
+
 
 // Removed the game logic that plays 5 rounds
 /* function playGame(rounds) {
