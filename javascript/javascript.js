@@ -2,27 +2,27 @@ const totalRounds = 5;
 const resultText = document.getElementById("result-text");
 const resultScore = document.getElementById("result-score");
 const buttons = document.querySelectorAll("button");
+const hScoreSpan = document.getElementById("human-score");
+const cScoreSpan = document.getElementById("computer-score");
+
+let humanScore = 0;
+let computerScore = 0;
 
 function capitalize(str) {
-
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 function getComputerChoice() {
-
-    const computerChoice = Math.floor(Math.random() * 3);
-    const rock = 'rock';
-    const paper = 'paper';
-    const scissors = 'scissors';
+  const computerChoice = Math.floor(Math.random() * 3);
+  const rock = "rock";
+  const paper = "paper";
+  const scissors = "scissors";
 
   if (computerChoice === 0) {
-    console.log("Computer chose: rock");
     return rock;
   } else if (computerChoice === 1) {
-    console.log("Computer chose: paper");
-return paper;
+    return paper;
   } else if (computerChoice === 2) {
-    console.log("Computer chose: scissors");
     return scissors;
   }
 }
@@ -37,27 +37,47 @@ function playRound(humanChoice) {
   const computerChoice = getComputerChoice();
   let result = "";
 
+  if (humanScore >= 5 && computerScore < 5) {
+    resultText.textContent = "You've beat the computer! Nice!";
+    return;
+  } else if (computerScore >= 5 && humanScore < 5) {
+    resultText.textContent = "You have lost to the computer! No bueno!";
+    return;
+  } else if (computerScore > 4 && humanScore > 4 && computerScore === humanScore) {
+    resultText.textContent = "You have tied! Interesting...";
+    return;
+  }; 
+
   if (humanChoice === computerChoice) {
-          console.log("It\'s a tie!");
-          result = "tie";
-          return result;
-      } else if ((humanChoice === 'rock' && computerChoice === 'scissors') || (humanChoice === 'paper' &&computerChoice === 'rock') || (humanChoice === 'scissors' && computerChoice == 'paper')) {
-          console.log('You win! ' + humanChoice + ' beats ' + computerChoice);
-          result = "human";
-          return result;
-      } else {
-          console.log('You lose! ' + capitalize(computerChoice) + ' beats ' + capitalize(humanChoice));
-          result = "computer";
-          return result;
-      }
+    resultText.textContent = "It's a tie!";
+  } else if (
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice == "paper")
+  ) {
+    resultText.textContent =
+      "You win! " +
+      capitalize(humanChoice) +
+      " beats " +
+      capitalize(computerChoice);
+      humanScore++;
+      hScoreSpan.textContent = humanScore;
+  } else {
+    resultText.textContent =
+      "You lose! " +
+      capitalize(computerChoice) +
+      " beats " +
+      capitalize(humanChoice);
+      computerScore++;
+      cScoreSpan.textContent = computerScore;
+  };
 }
 
 buttons.forEach((button) => {
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     playRound(button.id);
   });
 });
-
 
 // Removed the game logic that plays 5 rounds
 /* function playGame(rounds) {
