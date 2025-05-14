@@ -1,8 +1,6 @@
 const totalRounds = 5;
-const rockBtn = document.getElementById("rock-btn");
-const paperBtn = document.getElementById("paper-btn");
-const scissorsBtn = document.getElementById("scissors-btn");
-
+const resultText = document.getElementById("result-text");
+const resultScore = document.getElementById("result-score");
 const buttons = document.querySelectorAll("button");
 
 function capitalize(str) {
@@ -54,22 +52,9 @@ function playRound(humanChoice) {
       }
 }
 
-function playerSelection(selection) {
-  if (selection === 'rock-btn') {
-    console.log('player chose rock');
-    playRound('rock');
-  } else if (selection === 'paper-btn') {
-    console.log('player chose paper');
-    playRound('paper');
-  } else {
-    console.log('player chose scissors');
-    playRound('scissors');
-  } 
-};
-
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
-    playerSelection(button.id);
+    playRound(button.id);
   });
 });
 
