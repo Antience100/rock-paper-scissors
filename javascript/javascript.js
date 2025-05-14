@@ -50,7 +50,8 @@ function playRound() {
       }
 }
 
-function playGame(rounds) {
+// Removed the game logic that plays 5 rounds
+/* function playGame(rounds) {
   let humanScore = 0;
   let computerScore = 0;
   let roundWinner = "";
@@ -74,4 +75,4 @@ function playGame(rounds) {
   }
 }
 
-playGame(totalRounds);
+playGame(totalRounds); */
